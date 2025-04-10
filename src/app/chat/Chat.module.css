@@ -1,0 +1,55 @@
+/* pages/Chat.module.css */
+.container {
+  min-height: 100vh; /* Full viewport height */
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(
+    135deg,
+    #e6f4ea 0%,
+    #ffffff 100%
+  ); /* Matches Home and ChatWindow */
+  padding: 0px; /* Consistent padding */
+  position: relative; /* For absolute positioning of toasts */
+}
+
+.header {
+  text-align: center;
+  font-size: 1.5rem; /* Matches your original */
+  font-weight: 500;
+  color: #333;
+  margin: 20px 0 10px; /* Spacing above and below */
+}
+
+.partnerName {
+  font-weight: 700; /* Bold partner name */
+  color: #3498db; /* Blue to match app theme */
+}
+
+.waiting {
+  text-align: center;
+  font-size: 1.25rem; /* Slightly larger for visibility */
+  color: #666; /* Muted gray */
+  margin: auto; /* Center vertically and horizontally */
+  padding: 20px;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.8
+  ); /* Semi-transparent white background */
+  border-radius: 15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  
+  .header {
+    font-size: 1.25rem;
+    margin: 15px 0 10px;
+  }
+  .waiting {
+    font-size: 1rem;
+    padding: 15px;
+  }
+}
