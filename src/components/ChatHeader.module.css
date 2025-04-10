@@ -1,0 +1,39 @@
+/* components/ChatHeader.module.css */
+.header {
+  position: sticky; /* Sticks to the top of ChatWindow */
+  top: 0;
+  background: linear-gradient(
+    135deg,
+    #81c784 0%,
+    #4caf50 100%
+  ); /* Green gradient */
+  color: white;
+  padding: 10px 15px;
+  border-radius: 15px 15px 0 0; /* Rounded top corners */
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  z-index: 2; /* Stays above messages */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px; /* Space between label and name */
+}
+
+.label {
+  font-weight: 400;
+  opacity: 0.9; /* Slightly faded for contrast */
+}
+
+.partnerName {
+  font-weight: 700; /* Bold partner name */
+  background: rgba(255, 255, 255, 0.2); /* Subtle white overlay */
+  padding: 2px 8px;
+  border-radius: 8px;
+  transition: transform 0.2s ease; /* Smooth animation */
+}
+
+.header:hover .partnerName {
+  transform: scale(1.05); /* Slight grow effect on hover */
+}

@@ -1,57 +1,9 @@
-// // components/ChatWindow.js
-// import { useEffect, useState } from "react";
-// import Toast from "./Toast";
-// import styles from "./ChatWindow.module.css"; // Import the CSS module
-
-// export default function ChatWindow({ messages }) {
-//   const [toast, setToast] = useState({ message: "", type: "info" });
-//   const [userId, setUserId] = useState("");
-
-//   const showToast = (message, type = "info") => {
-//     setToast({ message, type });
-//   };
-
-//   useEffect(() => {
-//     showToast("Connected to chat!", "success"); // Toast on mount
-//   }, []);
-
-//   useEffect(() => {
-//     const userId = sessionStorage.getItem("userId");
-//     setUserId(userId);
-//   }, []);
-
-//   return (
-//     <div className={styles.chatContainer}>
-//       {messages.length === 0 ? (
-//         <p className={styles.emptyMessage}>Start chatting...</p>
-//       ) : (
-//         messages.map((msg, index) => (
-//           <p
-//             key={index}
-//             className={`${styles.message} ${
-//               msg.senderId === userId ? styles.self : styles.other
-//             }`}
-//           >
-//             {msg.message}
-//           </p>
-//         ))
-//       )}
-//       <Toast
-//         message={toast.message}
-//         type={toast.type}
-//         duration={3000}
-//         onClose={() => setToast({ message: "", type: "info" })}
-//       />
-//     </div>
-//   );
-// }
-
-// components/ChatWindow.js
 import { useEffect, useState, useRef } from "react";
 import Toast from "./Toast";
 import styles from "./ChatWindow.module.css";
+import ChatHeader from "./ChatHeader";
 
-export default function ChatWindow({ messages }) {
+export default function ChatWindow({ messages, partnerName }) {
   const [toast, setToast] = useState({ message: "", type: "info" });
   const [userId, setUserId] = useState("");
   const chatContainerRef = useRef(null); // Ref to the chat container
@@ -78,6 +30,7 @@ export default function ChatWindow({ messages }) {
 
   return (
     <div className={styles.chatContainer} ref={chatContainerRef}>
+      <ChatHeader partnerName={partnerName} />
       {messages.length === 0 ? (
         <p className={styles.emptyMessage}>Start chatting...</p>
       ) : (

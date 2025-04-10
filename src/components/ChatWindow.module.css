@@ -5,9 +5,8 @@
   width: 100%;
   padding: 15px; /* Increased padding for breathing room */
   padding-bottom: 100px;
-  height: 93vh; /* Fixed height as per your original */
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
+  padding-top: 10px;
+  height: 100vh; /* Fixed height as per your original */
   overflow-y: auto; /* Scrollable when content overflows */
   display: flex;
   flex-direction: column;
