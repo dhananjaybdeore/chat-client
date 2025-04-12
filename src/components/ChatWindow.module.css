@@ -1,7 +1,5 @@
 /* components/ChatWindow.module.css */
 .chatContainer {
-  position: fixed;
-  bottom: 0;
   width: 100%;
   padding: 15px; /* Increased padding for breathing room */
   padding-bottom: 100px;
