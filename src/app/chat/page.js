@@ -209,11 +209,13 @@ export default function Chat() {
   const [factList, setFactList] = useState(shuffleArray([...funFacts]));
 
   const showToast = (message, type = "info") => {
+    console.log("showToast function called");
     const id = Date.now();
     setToasts((prev) => [...prev, { id, message, type }]);
   };
 
   const removeToast = (id) => {
+    console.log("removeToast function called");
     setToasts((prev) => prev.filter((toast) => toast.id !== id));
   };
 
@@ -233,32 +235,35 @@ export default function Chat() {
       userName,
       (newMessage) => {
         setMessages((prev) => [...prev, newMessage]);
-        setWaiting(false);
+        setWaiting(false); // Updates state, but won’t trigger this effect
       },
       (waitingStatus, partnerName) => {
         setPartnerName(partnerName);
         setMessages([]);
-        setWaiting(waitingStatus);
+        setWaiting(waitingStatus); // Updates state, but won’t trigger this effect
       },
       showToast
     );
 
-    // Rotate fun facts every 3 seconds while waiting
+    // Cleanup: Disconnect WebSocket when component unmounts
+    return () => {
+      disconnectWebSocket();
+    };
+  }, []); // Empty dependency array: runs once on mount, cleanup on unmount
+
+  // Fun fact rotation effect
+  useEffect(() => {
     let factInterval;
     if (waiting) {
       let index = 0;
       factInterval = setInterval(() => {
         setCurrentFact(factList[index]);
-        index = (index + 1) % factList.length; // Loop through shuffled list
+        index = (index + 1) % factList.length;
       }, 3000);
     }
-
-    return () => {
-      disconnectWebSocket();
-      clearInterval(factInterval);
-    };
-  }, [router, waiting]);
-
+    // Cleanup: Clear interval when waiting changes or component unmounts
+    return () => clearInterval(factInterval);
+  }, [waiting]); // Depends on waiting
   return (
     <div className={styles.container}>
       {waiting ? (
