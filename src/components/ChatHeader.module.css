@@ -1,13 +1,15 @@
 /* components/ChatHeader.module.css */
 .header {
-  position: sticky; /* Sticks to the top of ChatWindow */
-  top: 0;
+  position: fixed; /* Sticks to the top of ChatWindow */
+  top: 5px;
+  width: 98%; /* Full width */
   background: linear-gradient(
     135deg,
     #81c784 0%,
     #4caf50 100%
   ); /* Green gradient */
   color: white;
+  align-self: center;
   padding: 10px 15px;
   border-radius: 15px 15px 0 0; /* Rounded top corners */
   text-align: center;

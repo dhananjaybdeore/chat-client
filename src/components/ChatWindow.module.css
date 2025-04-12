@@ -1,10 +1,12 @@
 /* components/ChatWindow.module.css */
 .chatContainer {
+  position: fixed;
+  bottom: 0;
   width: 100%;
   padding: 15px; /* Increased padding for breathing room */
   padding-bottom: 100px;
-  padding-top: 10px;
-  height: 100vh; /* Fixed height as per your original */
+  padding-top: 20px;
+  height: 95vh; /* Fixed height as per your original */
   overflow-y: auto; /* Scrollable when content overflows */
   display: flex;
   flex-direction: column;
