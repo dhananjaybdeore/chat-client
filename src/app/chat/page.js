@@ -18,6 +18,7 @@ export default function Chat() {
   const [messages, setMessages] = useState([]);
   const [waiting, setWaiting] = useState(true);
   const [toasts, setToasts] = useState([]);
+  const [isPartnerTyping, setIsPartnerTyping] = useState(false);
   const router = useRouter();
   const funFacts = [
     "🐙 Octopuses have three hearts!",
@@ -236,11 +237,20 @@ export default function Chat() {
       (newMessage) => {
         setMessages((prev) => [...prev, newMessage]);
         setWaiting(false); // Updates state, but won’t trigger this effect
+        setIsPartnerTyping(false);
       },
       (waitingStatus, partnerName) => {
         setPartnerName(partnerName);
         setMessages([]);
         setWaiting(waitingStatus); // Updates state, but won’t trigger this effect
+        setIsPartnerTyping(false);
+      },
+      (isTyping) => {
+        setIsPartnerTyping(isTyping); // Handle TYPING events
+        if (isTyping) {
+          // Auto-hide after 3s
+          setTimeout(() => setIsPartnerTyping(false), 3000);
+        }
       },
       showToast
     );
@@ -276,7 +286,11 @@ export default function Chat() {
         </div>
       ) : (
         <>
-          <ChatWindow messages={messages} partnerName={partnerName} />
+          <ChatWindow
+            messages={messages}
+            partnerName={partnerName}
+            isPartnerTyping={isPartnerTyping}
+          />
           <MessageInput onSend={sendMessage} />
         </>
       )}

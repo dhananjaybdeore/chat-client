@@ -6,6 +6,7 @@ export const connectWebSocket = (
   userName,
   onMessage,
   onDisconnect,
+  onTyping,
   onToast
 ) => {
   if (socket) return;
@@ -30,6 +31,8 @@ export const connectWebSocket = (
       onDisconnect(true); // Trigger waiting UI
     } else if (data.type === "RECEIVE_MESSAGE") {
       onMessage({ message: data.message, senderId: data.senderId });
+    } else if (data.type === "TYPING") {
+      onTyping(true);
     }
   };
 
@@ -45,6 +48,16 @@ export const sendMessage = (message) => {
   }
 };
 
+export function sendTyping(userId) {
+  if (socket && socket.readyState === WebSocket.OPEN) {
+    console.log("Sending TYPING event");
+    socket.send(
+      JSON.stringify({
+        type: "TYPING",
+      })
+    );
+  }
+}
 export const disconnectWebSocket = () => {
   if (socket) {
     if (socket.readyState === WebSocket.OPEN) {

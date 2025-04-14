@@ -3,7 +3,7 @@ import Toast from "./Toast";
 import styles from "./ChatWindow.module.css";
 import ChatHeader from "./ChatHeader";
 
-export default function ChatWindow({ messages, partnerName }) {
+export default function ChatWindow({ messages, partnerName, isPartnerTyping }) {
   const [toast, setToast] = useState({ message: "", type: "info" });
   const [userId, setUserId] = useState("");
   const chatContainerRef = useRef(null); // Ref to the chat container
@@ -31,7 +31,7 @@ export default function ChatWindow({ messages, partnerName }) {
   return (
     <div className={styles.chatContainer} ref={chatContainerRef}>
       <ChatHeader partnerName={partnerName} />
-      {messages.length === 0 ? (
+      {messages.length === 0 && !isPartnerTyping ? (
         <p className={styles.emptyMessage}>Start chatting...</p>
       ) : (
         messages.map((msg, index) => (
@@ -44,6 +44,17 @@ export default function ChatWindow({ messages, partnerName }) {
             {msg.message}
           </p>
         ))
+      )}
+      {isPartnerTyping && (
+        <p className={styles.typingIndicator}>
+          <span>
+            {" "}
+            <b>{partnerName}</b> is typing
+          </span>
+          <span className={styles.dot}>.</span>
+          <span className={styles.dot}>.</span>
+          <span className={styles.dot}>.</span>
+        </p>
       )}
       <Toast
         message={toast.message}
